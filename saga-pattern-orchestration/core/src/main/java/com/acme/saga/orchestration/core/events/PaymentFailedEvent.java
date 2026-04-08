@@ -1,4 +1,4 @@
-package com.acme.saga.orchestration.core.dto;
+package com.acme.saga.orchestration.core.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,21 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class Payment {
-
-    private UUID id;
+@AllArgsConstructor
+public class PaymentFailedEvent {
     private UUID orderId;
     private UUID productId;
-    private BigDecimal productPrice;
-    private Integer productQuantity;
+    private int quantity;
 
 }
-

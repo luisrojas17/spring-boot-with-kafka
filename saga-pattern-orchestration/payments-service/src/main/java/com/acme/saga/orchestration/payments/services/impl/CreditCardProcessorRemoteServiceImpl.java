@@ -1,7 +1,8 @@
-package com.appsdeveloperblog.payments.service;
+package com.acme.saga.orchestration.payments.services.impl;
 
 import com.acme.saga.orchestration.core.dto.CreditCardProcessRequest;
 import com.acme.saga.orchestration.core.exceptions.CreditCardProcessorUnavailableException;
+import com.acme.saga.orchestration.payments.services.CreditCardProcessorRemoteService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;

@@ -1,4 +1,4 @@
-package com.acme.saga.orchestration.core.dto;
+package com.acme.saga.orchestration.core.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,10 +11,10 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class Shipment {
-    private UUID id;
+@AllArgsConstructor
+public class PaymentProcessedEvent {
+
     private UUID orderId;
-    private UUID paymentId;
+    private UUID pymentId;
 }

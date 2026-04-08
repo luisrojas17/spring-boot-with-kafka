@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.payments.config;
+package com.acme.saga.orchestration.payments.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.payments.service;
+package com.acme.saga.orchestration.payments.services;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

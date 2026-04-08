@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.payments.service;
+package com.acme.saga.orchestration.payments.services;
 
 import com.acme.saga.orchestration.core.dto.Payment;
 

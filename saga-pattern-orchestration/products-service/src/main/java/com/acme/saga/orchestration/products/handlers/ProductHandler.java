@@ -46,7 +46,10 @@ public class ProductHandler {
 
             // To reserve a product
             Product product =
-                    new Product(reserveProductEvent.getProductId(), reserveProductEvent.getQuantity());
+                    Product.builder()
+                            .id(reserveProductEvent.getProductId())
+                            .quantity(reserveProductEvent.getQuantity())
+                            .build();
 
             productService.reserve(product, reserveProductEvent.getOrderId());
 

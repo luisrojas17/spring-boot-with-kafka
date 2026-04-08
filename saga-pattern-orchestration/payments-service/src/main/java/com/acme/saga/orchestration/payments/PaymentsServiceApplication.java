@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.payments;
+package com.acme.saga.orchestration.payments;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

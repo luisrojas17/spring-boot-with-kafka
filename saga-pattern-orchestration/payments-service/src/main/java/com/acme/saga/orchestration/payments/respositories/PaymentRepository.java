@@ -1,6 +1,6 @@
-package com.appsdeveloperblog.payments.dao.jpa.repository;
+package com.acme.saga.orchestration.payments.respositories;
 
-import com.appsdeveloperblog.payments.dao.jpa.entity.PaymentEntity;
+import com.acme.saga.orchestration.payments.respositories.entities.PaymentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

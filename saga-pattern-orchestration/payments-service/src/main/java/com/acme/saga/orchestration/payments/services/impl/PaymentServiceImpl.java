@@ -1,8 +1,10 @@
-package com.appsdeveloperblog.payments.service;
+package com.acme.saga.orchestration.payments.services.impl;
 
 import com.acme.saga.orchestration.core.dto.Payment;
-import com.appsdeveloperblog.payments.dao.jpa.entity.PaymentEntity;
-import com.appsdeveloperblog.payments.dao.jpa.repository.PaymentRepository;
+import com.acme.saga.orchestration.payments.respositories.entities.PaymentEntity;
+import com.acme.saga.orchestration.payments.respositories.PaymentRepository;
+import com.acme.saga.orchestration.payments.services.CreditCardProcessorRemoteService;
+import com.acme.saga.orchestration.payments.services.PaymentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

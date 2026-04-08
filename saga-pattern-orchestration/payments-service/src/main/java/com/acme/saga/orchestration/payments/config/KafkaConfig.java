@@ -1,4 +1,4 @@
-package com.acme.saga.orchestration.orders.config;
+package com.acme.saga.orchestration.payments.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,12 +14,6 @@ import org.springframework.kafka.core.ProducerFactory;
 @Configuration
 public class KafkaConfig {
 
-    @Value("${orders.events.topic.name}")
-    private String ordersEventsTopicName;
-
-    @Value("${products.events.topic.name}")
-    private String productsEventsTopicName;
-
     @Value("${payments.events.topic.name}")
     private String paymentsEventsTopicName;
 
@@ -33,33 +27,7 @@ public class KafkaConfig {
     }
 
     /**
-     * To create a new topic for orders events if it does not exist.
-     *
-     * @return an instance of NewTopic.
-     */
-    @Bean
-    NewTopic createOrdersEventsTopic() {
-        return TopicBuilder.name(ordersEventsTopicName)
-                .partitions(TOPIC_PARTITIONS)
-                .replicas(TOPIC_REPLICATION_FACTOR)
-                .build();
-    }
-
-    /**
-     * To create a new topic for products events if it does not exist.
-     *
-     * @return an instance of NewTopic.
-     */
-    @Bean
-    NewTopic createProductsEventsTopic() {
-        return TopicBuilder.name(productsEventsTopicName)
-                .partitions(TOPIC_PARTITIONS)
-                .replicas(TOPIC_REPLICATION_FACTOR)
-                .build();
-    }
-
-    /**
-     * To create a new topic for payments events if it does not exist.
+     * To create the payments events topic if it does not exist.
      *
      * @return an instance of NewTopic.
      */
@@ -70,5 +38,4 @@ public class KafkaConfig {
                 .replicas(TOPIC_REPLICATION_FACTOR)
                 .build();
     }
-
 }
