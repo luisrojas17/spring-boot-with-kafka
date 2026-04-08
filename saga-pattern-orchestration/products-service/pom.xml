@@ -11,9 +11,9 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>product-service</artifactId>
-    <name>product-service</name>
-    <description>Product Service</description>
+    <artifactId>products-service</artifactId>
+    <name>products-service</name>
+    <description>Products Service</description>
 
     <dependencies>
         <dependency>

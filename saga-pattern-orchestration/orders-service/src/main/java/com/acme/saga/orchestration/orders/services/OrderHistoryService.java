@@ -1,4 +1,4 @@
-package com.acme.saga.orchestration.orders.service;
+package com.acme.saga.orchestration.orders.services;
 
 import com.acme.saga.orchestration.core.enums.OrderStatus;
 import com.acme.saga.orchestration.orders.dto.OrderHistory;

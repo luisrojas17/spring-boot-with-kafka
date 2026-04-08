@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.products.dto;
+package com.acme.saga.orchestration.products.dto;
 
 import java.math.BigDecimal;
 import java.util.UUID;

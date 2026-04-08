@@ -1,11 +1,11 @@
-package com.acme.saga.orchestration.orders.service.impl;
+package com.acme.saga.orchestration.orders.services.impl;
 
 import com.acme.saga.orchestration.core.dto.Order;
 import com.acme.saga.orchestration.core.events.OrderCreatedEvent;
 import com.acme.saga.orchestration.core.enums.OrderStatus;
 import com.acme.saga.orchestration.orders.repositories.entities.OrderEntity;
 import com.acme.saga.orchestration.orders.repositories.OrderRepository;
-import com.acme.saga.orchestration.orders.service.OrderService;
+import com.acme.saga.orchestration.orders.services.OrderService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;

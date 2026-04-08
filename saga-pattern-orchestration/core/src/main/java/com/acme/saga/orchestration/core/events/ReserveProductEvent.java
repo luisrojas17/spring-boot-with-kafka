@@ -1,7 +1,9 @@
-package com.acme.saga.orchestration.core.commands;
+package com.acme.saga.orchestration.core.events;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.UUID;
@@ -12,8 +14,11 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-public class ReserveProductCommand {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ReserveProductEvent {
+
+    private UUID orderId;
     private UUID productId;
     private int quantity;
-    private UUID orderId;
 }

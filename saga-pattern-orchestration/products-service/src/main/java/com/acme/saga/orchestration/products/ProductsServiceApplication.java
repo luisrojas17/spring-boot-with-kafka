@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.products;
+package com.acme.saga.orchestration.products;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

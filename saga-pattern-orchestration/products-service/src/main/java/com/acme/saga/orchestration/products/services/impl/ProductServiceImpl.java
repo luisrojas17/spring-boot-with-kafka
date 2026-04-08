@@ -1,10 +1,10 @@
-package com.appsdeveloperblog.products.service.impl;
+package com.acme.saga.orchestration.products.services.impl;
 
 import com.acme.saga.orchestration.core.dto.Product;
 import com.acme.saga.orchestration.core.exceptions.ProductInsufficientQuantityException;
-import com.appsdeveloperblog.products.repositories.entities.ProductEntity;
-import com.appsdeveloperblog.products.repositories.ProductRepository;
-import com.appsdeveloperblog.products.service.ProductService;
+import com.acme.saga.orchestration.products.repositories.entities.ProductEntity;
+import com.acme.saga.orchestration.products.repositories.ProductRepository;
+import com.acme.saga.orchestration.products.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class ProductServiceImpl implements ProductService {
+
     private final ProductRepository productRepository;
 
     public ProductServiceImpl(ProductRepository productRepository) {
@@ -28,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
         log.info("Checking if there are products [{}] available for order [{}].",
                 desiredProduct.getId(), orderId);
 
+        // To Do Handle test case when the product does not exist.
         ProductEntity productEntity = productRepository.findById(desiredProduct.getId()).orElseThrow();
 
         if (desiredProduct.getQuantity() > productEntity.getQuantity()) {
@@ -49,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
         BeanUtils.copyProperties(productEntity, reservedProduct);
         reservedProduct.setQuantity(desiredProduct.getQuantity());
 
-        log.info("It was received ");
+        log.info("It was reserved product [{}, {}].", reservedProduct.getId(), orderId);
 
         return reservedProduct;
     }

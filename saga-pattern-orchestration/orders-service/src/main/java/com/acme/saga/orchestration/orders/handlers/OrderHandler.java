@@ -1,9 +1,9 @@
 package com.acme.saga.orchestration.orders.handlers;
 
-import com.acme.saga.orchestration.core.commands.ReserveProductCommand;
+import com.acme.saga.orchestration.core.events.ReserveProductEvent;
 import com.acme.saga.orchestration.core.events.OrderCreatedEvent;
 import com.acme.saga.orchestration.core.enums.OrderStatus;
-import com.acme.saga.orchestration.orders.service.OrderHistoryService;
+import com.acme.saga.orchestration.orders.services.OrderHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaHandler;
@@ -13,7 +13,8 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 /**
- * This class acts as a Kafka consumer to consume order events.
+ * This class acts as a Kafka consumer to consume order events and produce ReserveProductEvent to
+ * products events topic.
  *
  * @see org.springframework.kafka.annotation.KafkaListener
  * @see org.springframework.kafka.core.KafkaTemplate
@@ -45,16 +46,19 @@ public class OrderHandler {
 
         log.info("Receiving order event: [{}].", orderCreatedEvent.getOrderId());
 
-        ReserveProductCommand reserveProductCommand = ReserveProductCommand.builder()
-                .productId(orderCreatedEvent.getProductId().toString())
+        ReserveProductEvent reserveProductEvent = ReserveProductEvent.builder()
+                .productId(orderCreatedEvent.getProductId())
                 .quantity(orderCreatedEvent.getProductQuantity())
                 .orderId(orderCreatedEvent.getOrderId())
                 .build();
 
-        kafkaTemplate.send(productsEventsTopicName, reserveProductCommand);
+        log.info("Producing reserve product event [{}, {}]",
+                orderCreatedEvent.getOrderId(), orderCreatedEvent.getProductId());
 
-        log.info("It was created product event: [{}, {}].",
-                reserveProductCommand.getOrderId(), reserveProductCommand.getProductId());
+        kafkaTemplate.send(productsEventsTopicName, reserveProductEvent);
+
+        log.info("It was created receive product event: [{}, {}].",
+                reserveProductEvent.getOrderId(), reserveProductEvent.getProductId());
 
         // To save order into history database
         orderHistoryService.add(orderCreatedEvent.getOrderId(), OrderStatus.CREATED);

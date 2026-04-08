@@ -1,10 +1,10 @@
-package com.acme.saga.orchestration.orders.service.impl;
+package com.acme.saga.orchestration.orders.services.impl;
 
 import com.acme.saga.orchestration.core.enums.OrderStatus;
 import com.acme.saga.orchestration.orders.repositories.entities.OrderHistoryEntity;
 import com.acme.saga.orchestration.orders.repositories.OrderHistoryRepository;
 import com.acme.saga.orchestration.orders.dto.OrderHistory;
-import com.acme.saga.orchestration.orders.service.OrderHistoryService;
+import com.acme.saga.orchestration.orders.services.OrderHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

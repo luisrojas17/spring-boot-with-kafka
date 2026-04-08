@@ -1,6 +1,6 @@
-package com.appsdeveloperblog.products.repositories;
+package com.acme.saga.orchestration.products.repositories;
 
-import com.appsdeveloperblog.products.repositories.entities.ProductEntity;
+import com.acme.saga.orchestration.products.repositories.entities.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

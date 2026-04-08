@@ -1,9 +1,9 @@
-package com.appsdeveloperblog.products.web.controller;
+package com.acme.saga.orchestration.products.web.controller;
 
 import com.acme.saga.orchestration.core.dto.Product;
-import com.appsdeveloperblog.products.dto.ProductCreationRequest;
-import com.appsdeveloperblog.products.dto.ProductCreationResponse;
-import com.appsdeveloperblog.products.service.ProductService;
+import com.acme.saga.orchestration.products.dto.ProductCreationRequest;
+import com.acme.saga.orchestration.products.dto.ProductCreationResponse;
+import com.acme.saga.orchestration.products.services.ProductService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;

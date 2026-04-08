@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.products.service;
+package com.acme.saga.orchestration.products.services;
 
 import com.acme.saga.orchestration.core.dto.Product;
 
