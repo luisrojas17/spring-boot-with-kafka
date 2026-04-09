@@ -51,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
         BeanUtils.copyProperties(productEntity, reservedProduct);
         reservedProduct.setQuantity(desiredProduct.getQuantity());
 
-        log.info("It was reserved product [{}, {}].", reservedProduct.getId(), orderId);
+        log.info("It was reserved product [{}] for orderID [{}].", reservedProduct, orderId);
 
         return reservedProduct;
     }

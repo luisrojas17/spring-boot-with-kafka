@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-@KafkaListener(topics = "payments.events.topic.name")
+@KafkaListener(topics = {"${payments.events.topic.name}"})
 public class PaymentHandler {
 
     private final PaymentService paymentService;
@@ -39,12 +39,19 @@ public class PaymentHandler {
         this.paymentsEventsTopicName = paymentsEventsTopicName;
     }
 
+    /**
+     * To handle the event to process payment which is produced by ProductHandler.
+     * Also, it is produced a new PaymentProcessedEvent to payment events topic.
+     *
+     * @param event an instance of ProcessPaymentEvent.
+     */
     @KafkaHandler
     public void handler(@Payload ProcessPaymentEvent event) {
 
         try {
 
-            log.info("Receiving process payment event: [{}]", event);
+            log.info("Receiving process payment event: [{}, {}]",
+                    event.getOrderId(), event.getProductId());
 
             Payment payment = Payment.builder()
                     .orderId(event.getOrderId())

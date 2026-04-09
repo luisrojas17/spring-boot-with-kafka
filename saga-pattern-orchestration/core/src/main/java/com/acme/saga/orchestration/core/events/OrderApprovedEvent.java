@@ -8,11 +8,14 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+/**
+ * This class represents an order approved event.
+ */
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApprovedOrderEvent {
+public class OrderApprovedEvent {
     private UUID orderId;
 }

@@ -14,6 +14,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * This class contains business logic implementation to handle OrderHistory.
+ */
 @Slf4j
 @Service
 public class OrderHistoryServiceImpl implements OrderHistoryService {
@@ -39,7 +42,7 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
     }
 
     @Override
-    public List<OrderHistory> findByOrderId(UUID orderId) {
+    public List<OrderHistory> findById(UUID orderId) {
         var entities = orderHistoryRepository.findByOrderId(orderId);
         return entities.stream().map(entity -> {
             OrderHistory orderHistory = new OrderHistory();

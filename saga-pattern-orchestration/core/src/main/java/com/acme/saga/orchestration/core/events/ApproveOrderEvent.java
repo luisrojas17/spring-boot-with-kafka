@@ -9,18 +9,13 @@ import lombok.Setter;
 import java.util.UUID;
 
 /**
- * This class represents an event sent from the order service to publish a new order created event.
+ * This class represents an event to request approve order.
  */
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class OrderCreatedEvent {
-
+@NoArgsConstructor
+public class ApproveOrderEvent {
     private UUID orderId;
-    private UUID customerId;
-    private UUID productId;
-    private int productQuantity;
-
 }

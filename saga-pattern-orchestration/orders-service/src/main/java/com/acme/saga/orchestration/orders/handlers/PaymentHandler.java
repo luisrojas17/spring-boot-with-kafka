@@ -1,6 +1,6 @@
 package com.acme.saga.orchestration.orders.handlers;
 
-import com.acme.saga.orchestration.core.events.ApprovedOrderEvent;
+import com.acme.saga.orchestration.core.events.ApproveOrderEvent;
 import com.acme.saga.orchestration.core.events.PaymentProcessedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 
 /**
  * This class acts as a Kafka Consumer for Payment Processed Event and produce
- * an Approved Order Event to order events topic.
+ * an Approve Order Event to order events topic.
  */
 @Slf4j
 @Component
-@KafkaListener(topics = "payments.events.topic.name")
+@KafkaListener(topics = {"${payments.events.topic.name}"})
 public class PaymentHandler {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
@@ -32,22 +32,29 @@ public class PaymentHandler {
 
     }
 
+    /**
+     * To handler payment processed events which are produced by ProductHandler.
+     * Also, it is produced a new ApproveOrderEvent to orders events topic.
+     *
+     * @param event an instance of PaymentProcessedEvent.
+     */
     @KafkaHandler
     public void handler(@Payload PaymentProcessedEvent event) {
 
         log.info("Receiving payment processed event: [{}].", event);
 
-        ApprovedOrderEvent approvedOrderEvent =
-                ApprovedOrderEvent.builder()
+        // To approve the order
+        ApproveOrderEvent approveOrderEvent =
+                ApproveOrderEvent.builder()
                         .orderId(event.getOrderId())
                         .build();
 
         log.info("Producing approved order event: [{}, {}].",
                 event.getOrderId(), event.getPymentId());
 
-        kafkaTemplate.send(ordersEventsTopicName, approvedOrderEvent);
+        kafkaTemplate.send(ordersEventsTopicName, approveOrderEvent);
 
         log.info("It was created approved order event: [{}].",
-                approvedOrderEvent.getOrderId());
+                approveOrderEvent.getOrderId());
     }
 }

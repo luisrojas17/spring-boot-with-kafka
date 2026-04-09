@@ -9,5 +9,5 @@ import java.util.UUID;
 public interface OrderHistoryService {
     void add(UUID orderId, OrderStatus orderStatus);
 
-    List<OrderHistory> findByOrderId(UUID orderId);
+    List<OrderHistory> findById(UUID orderId);
 }

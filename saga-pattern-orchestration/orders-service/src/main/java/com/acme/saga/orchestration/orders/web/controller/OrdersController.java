@@ -19,8 +19,8 @@ import java.util.UUID;
 public class OrdersController {
 
     private final OrderService orderService;
-    private final OrderHistoryService orderHistoryService;
 
+    private final OrderHistoryService orderHistoryService;
 
     public OrdersController(OrderService orderService, OrderHistoryService orderHistoryService) {
         this.orderService = orderService;
@@ -29,10 +29,10 @@ public class OrdersController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public CreateOrderResponse placeOrder(@RequestBody @Valid CreateOrderRequest request) {
+    public CreateOrderResponse create(@RequestBody @Valid CreateOrderRequest request) {
         var order = new Order();
         BeanUtils.copyProperties(request, order);
-        Order createdOrder = orderService.placeOrder(order);
+        Order createdOrder = orderService.create(order);
 
         var response = new CreateOrderResponse();
         BeanUtils.copyProperties(createdOrder, response);
@@ -42,7 +42,7 @@ public class OrdersController {
     @GetMapping("/{orderId}/history")
     @ResponseStatus(HttpStatus.OK)
     public List<OrderHistoryResponse> getOrderHistory(@PathVariable UUID orderId) {
-        return orderHistoryService.findByOrderId(orderId).stream().map(orderHistory -> {
+        return orderHistoryService.findById(orderId).stream().map(orderHistory -> {
             OrderHistoryResponse orderHistoryResponse = new OrderHistoryResponse();
             BeanUtils.copyProperties(orderHistory, orderHistoryResponse);
             return orderHistoryResponse;

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-@KafkaListener(topics = "products.events.topic.name")
+@KafkaListener(topics = {"${products.events.topic.name}"})
 public class ProductHandler {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
@@ -32,16 +32,16 @@ public class ProductHandler {
     }
 
     @KafkaHandler
-    public void handle(@Payload ProductReservedEvent productReservedEvent) {
+    public void handler(@Payload ProductReservedEvent event) {
 
-        log.info("Receiving product reserved event: [{}]", productReservedEvent);
+        log.info("Receiving product reserved event: [{}]", event);
 
         ProcessPaymentEvent processPaymentEvent =
                 ProcessPaymentEvent.builder()
-                        .orderId(productReservedEvent.getOrderId())
-                        .productId(productReservedEvent.getProductId())
-                        .price(productReservedEvent.getPrice())
-                        .quantity(productReservedEvent.getQuantity())
+                        .orderId(event.getOrderId())
+                        .productId(event.getProductId())
+                        .price(event.getPrice())
+                        .quantity(event.getQuantity())
                         .build();
 
         log.info("Producing process payment event [{}, {}]",

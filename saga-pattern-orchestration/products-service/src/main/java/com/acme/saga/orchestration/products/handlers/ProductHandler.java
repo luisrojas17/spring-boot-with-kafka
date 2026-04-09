@@ -38,31 +38,31 @@ public class ProductHandler {
     }
 
     @KafkaHandler
-    public void handler(ReserveProductEvent reserveProductEvent) {
+    public void handler(ReserveProductEvent event) {
 
         try {
 
-            log.info("Receiving reserve product event: [{}].", reserveProductEvent);
+            log.info("Receiving reserve product event: [{}].", event);
 
             // To reserve a product
             Product product =
                     Product.builder()
-                            .id(reserveProductEvent.getProductId())
-                            .quantity(reserveProductEvent.getQuantity())
+                            .id(event.getProductId())
+                            .quantity(event.getQuantity())
                             .build();
 
-            productService.reserve(product, reserveProductEvent.getOrderId());
+            product = productService.reserve(product, event.getOrderId());
 
             ProductReservedEvent productReservedEvent =
                     ProductReservedEvent.builder()
-                            .orderId(reserveProductEvent.getOrderId())
-                            .productId(reserveProductEvent.getProductId())
+                            .orderId(event.getOrderId())
+                            .productId(event.getProductId())
                             .price(product.getPrice())
-                            .quantity(reserveProductEvent.getQuantity())
+                            .quantity(event.getQuantity())
                             .build();
 
             log.info("Producing product reserved event [{}, {}]",
-                    reserveProductEvent.getOrderId(), reserveProductEvent.getProductId());
+                    event.getOrderId(), event.getProductId());
 
             kafkaTemplate.send(productsEventsTopicName, productReservedEvent);
 
@@ -70,14 +70,14 @@ public class ProductHandler {
                     productReservedEvent.getOrderId(), productReservedEvent.getProductId());
 
         } catch (Exception e) {
-            log.error("Error reserving product: [{}].", reserveProductEvent, e);
+            log.error("Error reserving product: [{}].", event, e);
 
             // If product reservation fails it will be produce a new event to register the product.
             ProductReservationFailedEvent productReservationFailedEvent =
                     ProductReservationFailedEvent.builder()
-                            .orderId(reserveProductEvent.getOrderId())
-                            .productId(reserveProductEvent.getProductId())
-                            .quantity(reserveProductEvent.getQuantity())
+                            .orderId(event.getOrderId())
+                            .productId(event.getProductId())
+                            .quantity(event.getQuantity())
                             .build();
 
             log.warn("Producing product reservation failed event [{}, {}]",
